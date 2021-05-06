@@ -167,7 +167,7 @@ def download_danetqa_data_and_write_config(task_name: str, task_data_path: str, 
             "task": task_name,
             "paths": {
                 "train": os.path.join(task_data_path, "train.jsonl"),
-                "val": os.path.join(task_data_path, "dev.jsonl"),
+                "val": os.path.join(task_data_path, "val.jsonl"),
                 "test": os.path.join(task_data_path, "test.jsonl"),
             },
             "name": task_name,
