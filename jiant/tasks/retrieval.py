@@ -93,6 +93,7 @@ from jiant.utils.python.io import read_json
 
 
 TASK_DICT = {
+    "danetqa": DaNetQA,
     "abductive_nli": AbductiveNliTask,
     "arc_easy": ArcEasyTask,
     "arc_challenge": ArcChallengeTask,

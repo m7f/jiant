@@ -963,6 +963,7 @@ def get_evaluation_scheme_for_task(task) -> BaseEvaluationScheme:
     if isinstance(
         task,
         (
+            tasks_retrieval.DaNetQA,
             tasks_retrieval.AdversarialNliTask,
             tasks_retrieval.AbductiveNliTask,
             tasks_retrieval.AcceptabilityDefinitenessTask,
