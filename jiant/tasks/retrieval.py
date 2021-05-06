@@ -1,6 +1,7 @@
 import os
 from typing import Optional
 
+from jiant.tasks.lib.danetqa import DaNetQA
 from jiant.tasks.lib.abductive_nli import AbductiveNliTask
 from jiant.tasks.lib.acceptability_judgement.definiteness import AcceptabilityDefinitenessTask
 from jiant.tasks.lib.acceptability_judgement.coord import AcceptabilityCoordTask

@@ -25,6 +25,10 @@ def download_task_data_and_write_config(task_name: str, task_data_path: str, tas
         download_superglue_data_and_write_config(
             task_name=task_name, task_data_path=task_data_path, task_config_path=task_config_path
         )
+    elif task_name == "danetqa":
+        download_danetqa_data_and_write_config(
+            task_name=task_name, task_data_path=task_data_path, task_config_path=task_config_path
+        )
     elif task_name == "abductive_nli":
         download_abductive_nli_data_and_write_config(
             task_name=task_name, task_data_path=task_data_path, task_config_path=task_config_path
@@ -146,6 +150,26 @@ def download_squad_data_and_write_config(
             "task": "squad",
             "paths": {"train": train_path, "val": val_path},
             "kwargs": {"version_2_with_negative": version_2_with_negative},
+            "name": task_name,
+        },
+        path=task_config_path,
+    )
+
+
+def download_danetqa_data_and_write_config(task_name: str, task_data_path: str, task_config_path: str):
+    os.makedirs(task_data_path, exist_ok=True)
+    download_utils.download_and_unzip(
+        "https://russiansuperglue.com/tasks/download/DaNetQA",
+        task_data_path,
+    )
+    py_io.write_json(
+        data={
+            "task": task_name,
+            "paths": {
+                "train": os.path.join(task_data_path, "train.jsonl"),
+                "val": os.path.join(task_data_path, "dev.jsonl"),
+                "test": os.path.join(task_data_path, "test.jsonl"),
+            },
             "name": task_name,
         },
         path=task_config_path,
