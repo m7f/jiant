@@ -8,6 +8,7 @@ DIRECT_SUPERGLUE_TASKS_TO_DATA_URLS = {
 }
 
 OTHER_DOWNLOAD_TASKS = {
+    "danetqa",
     "abductive_nli",
     "arct",
     "fever_nli",

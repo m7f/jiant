@@ -159,7 +159,7 @@ def download_squad_data_and_write_config(
 def download_danetqa_data_and_write_config(task_name: str, task_data_path: str, task_config_path: str):
     os.makedirs(task_data_path, exist_ok=True)
     download_utils.download_and_unzip(
-        "https://russiansuperglue.com/tasks/download/DaNetQA",
+        "https://github.com/m7f/jiant/tree/adding_danetqa_task/data/DaNetQA.zip",
         task_data_path,
     )
     py_io.write_json(
