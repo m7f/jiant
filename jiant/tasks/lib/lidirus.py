@@ -8,42 +8,43 @@ from jiant.tasks.core import (
     BaseTokenizedExample,
     BaseDataRow,
     BatchMixin,
+    GlueMixin,
     SuperGlueMixin,
     Task,
     TaskTypes,
 )
 from jiant.tasks.lib.templates.shared import double_sentence_featurize, labels_to_bimap
-from jiant.utils.python.io import read_json_lines
+from jiant.utils.python.io import read_jsonl
 
 
 @dataclass
 class Example(BaseExample):
     guid: str
-    input_question: str
-    input_passage: str
+    input_premise: str
+    input_hypothesis: str
     label: str
 
     def tokenize(self, tokenizer):
         return TokenizedExample(
             guid=self.guid,
-            input_question=tokenizer.tokenize(self.input_question),
-            input_passage=tokenizer.tokenize(self.input_passage),
-            label_id=DaNetQATask.LABEL_TO_ID[self.label],
+            input_premise=tokenizer.tokenize(self.input_premise),
+            input_hypothesis=tokenizer.tokenize(self.input_hypothesis),
+            label_id=LiDiRusTask.LABEL_TO_ID[self.label],
         )
 
 
 @dataclass
 class TokenizedExample(BaseTokenizedExample):
     guid: str
-    input_question: List
-    input_passage: List
+    input_premise: List
+    input_hypothesis: List
     label_id: int
 
     def featurize(self, tokenizer, feat_spec):
         return double_sentence_featurize(
             guid=self.guid,
-            input_tokens_a=self.input_question,
-            input_tokens_b=self.input_passage,
+            input_tokens_a=self.input_premise,
+            input_tokens_b=self.input_hypothesis,
             label_id=self.label_id,
             tokenizer=tokenizer,
             feat_spec=feat_spec,
@@ -70,24 +71,28 @@ class Batch(BatchMixin):
     tokens: list
 
 
-class DaNetQATask(SuperGlueMixin, Task):
+class LiDiRusTask(SuperGlueMixin, GlueMixin, Task):
     Example = Example
     TokenizedExample = Example
     DataRow = DataRow
     Batch = Batch
 
     TASK_TYPE = TaskTypes.CLASSIFICATION
-    LABELS = [False, True]
+    LABELS = ["entailment", "not_entailment"]
     LABEL_TO_ID, ID_TO_LABEL = labels_to_bimap(LABELS)
 
+    @property
+    def num_labels(self):
+        return len(self.LABELS)
+
     def get_train_examples(self):
-        return self._create_examples(lines=read_json_lines(self.train_path), set_type="train")
+        return self._create_examples(lines=read_jsonl(self.train_path), set_type="train")
 
     def get_val_examples(self):
-        return self._create_examples(lines=read_json_lines(self.val_path), set_type="val")
+        return self._create_examples(lines=read_jsonl(self.val_path), set_type="val")
 
     def get_test_examples(self):
-        return self._create_examples(lines=read_json_lines(self.test_path), set_type="test")
+        return self._create_examples(lines=read_jsonl(self.test_path), set_type="test")
 
     @classmethod
     def _create_examples(cls, lines, set_type):
@@ -96,8 +101,8 @@ class DaNetQATask(SuperGlueMixin, Task):
             examples.append(
                 Example(
                     guid="%s-%s" % (set_type, line["idx"]),
-                    input_question=line["question"],
-                    input_passage=line["passage"],
+                    input_premise=line["sentence1"],
+                    input_hypothesis=line["sentence2"],
                     label=line["label"] if set_type != "test" else cls.LABELS[-1],
                 )
             )

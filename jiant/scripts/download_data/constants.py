@@ -8,7 +8,6 @@ DIRECT_SUPERGLUE_TASKS_TO_DATA_URLS = {
 }
 
 OTHER_DOWNLOAD_TASKS = {
-    "danetqa",
     "abductive_nli",
     "arct",
     "fever_nli",
@@ -41,8 +40,13 @@ OTHER_DOWNLOAD_TASKS = {
     "senteval_word_content",
 }
 
+RUSSIANSUPERGLUE_TASKS = {
+    "danetqa",
+    "rcb",
+}
+
 DIRECT_DOWNLOAD_TASKS = set(
-    list(SQUAD_TASKS) + list(DIRECT_SUPERGLUE_TASKS_TO_DATA_URLS) + list(OTHER_DOWNLOAD_TASKS)
+    list(SQUAD_TASKS) + list(DIRECT_SUPERGLUE_TASKS_TO_DATA_URLS) + list(OTHER_DOWNLOAD_TASKS) + list(RUSSIANSUPERGLUE_TASKS)
 )
 OTHER_HF_DATASETS_TASKS = {
     "snli",
