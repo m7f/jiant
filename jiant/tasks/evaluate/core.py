@@ -964,7 +964,6 @@ def get_evaluation_scheme_for_task(task) -> BaseEvaluationScheme:
         task,
         (
             tasks_retrieval.DaNetQATask,
-            tasks_retrieval.RCBTask,
             tasks_retrieval.AdversarialNliTask,
             tasks_retrieval.AbductiveNliTask,
             tasks_retrieval.AcceptabilityDefinitenessTask,
@@ -1008,7 +1007,13 @@ def get_evaluation_scheme_for_task(task) -> BaseEvaluationScheme:
         return CCGEvaluationScheme()
     elif isinstance(task, tasks_retrieval.CommitmentBankTask):
         return CommitmentBankEvaluationScheme()
-    elif isinstance(task, tasks_retrieval.ColaTask):
+    elif isinstance(
+        task,
+        (
+            tasks_retrieval.RCBTask,
+            tasks_retrieval.ColaTask,
+        )
+    ):
         return MCCEvaluationScheme()
     elif isinstance(
         task,
