@@ -1005,15 +1005,15 @@ def get_evaluation_scheme_for_task(task) -> BaseEvaluationScheme:
         return MCTACOEvaluationScheme()
     elif isinstance(task, tasks_retrieval.CCGTask):
         return CCGEvaluationScheme()
-    elif isinstance(task, tasks_retrieval.CommitmentBankTask):
-        return CommitmentBankEvaluationScheme()
     elif isinstance(
         task,
         (
             tasks_retrieval.RCBTask,
-            tasks_retrieval.ColaTask,
+            tasks_retrieval.CommitmentBankTask,
         )
     ):
+        return CommitmentBankEvaluationScheme()
+    elif isinstance(task, tasks_retrieval.ColaTask):
         return MCCEvaluationScheme()
     elif isinstance(
         task,
