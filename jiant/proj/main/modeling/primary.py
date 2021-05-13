@@ -524,19 +524,24 @@ class JiantBartModel(JiantTransformersModel):
             sep_token_extra=True,
         )
 
-    def encode(self, input_ids, input_mask, *args):
+    def encode(self, input_ids, segment_ids, input_mask, *args):
         # BART and mBART and encoder-decoder architectures.
         # As described in the BART paper and implemented in Transformers,
         # for single input tasks, the encoder input is the sequence,
         # the decode input is 1-shifted sequence, and the resulting
         # sentence representation is the final decoder state.
         # That's what we use for `unpooled` here.
-        dec_last, dec_all, enc_last, enc_all = super().__call__(
+        output = super().__call__(
             input_ids=input_ids,
             attention_mask=input_mask,
             output_hidden_states=True,
             return_dict=True,
         )
+        dec_last = output.last_hidden_state
+        dec_all  = output.decoder_hidden_states
+        enc_last = output.encoder_last_hidden_state
+        enc_all  = output.encoder_hidden_states
+
         unpooled = dec_last
         other = (enc_all + dec_all,)
 
