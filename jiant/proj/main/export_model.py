@@ -1,7 +1,7 @@
 import os
 
 import torch
-from transformers import AutoModelForPreTraining, AutoTokenizer
+from transformers import AutoModel, AutoTokenizer
 
 import jiant.utils.python.io as py_io
 import jiant.utils.zconf as zconf
@@ -40,7 +40,7 @@ def export_model(
                               ``./my_model_directory/configuration.json``.
         output_base_path: Base path to save output to
     """
-    model = AutoModelForPreTraining.from_pretrained(hf_pretrained_model_name_or_path)
+    model = AutoModel.from_pretrained(hf_pretrained_model_name_or_path)
 
     model_fol_path = os.path.join(output_base_path, "model")
     model_path = os.path.join(model_fol_path, "model.p")
