@@ -45,6 +45,7 @@ RUSSIANSUPERGLUE_TASKS = {
     "rcb",
     "terra",
     "parus",
+    "muserc",
 }
 
 DIRECT_DOWNLOAD_TASKS = set(

@@ -1071,7 +1071,7 @@ def get_evaluation_scheme_for_task(task) -> BaseEvaluationScheme:
         return XlingQAEvaluationScheme()
     elif isinstance(task, tasks_retrieval.MlqaTask):
         return MLQAEvaluationScheme()
-    elif isinstance(task, tasks_retrieval.MultiRCTask):
+    elif isinstance(task, (tasks_retrieval.MultiRCTask, tasks_retrieval.MuSeRCTask)):
         return MultiRCEvaluationScheme()
     elif isinstance(task, tasks_retrieval.StsbTask):
         return PearsonAndSpearmanEvaluationScheme()
