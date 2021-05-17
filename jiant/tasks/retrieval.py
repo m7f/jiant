@@ -3,6 +3,8 @@ from typing import Optional
 
 from jiant.tasks.lib.danetqa import DaNetQATask
 from jiant.tasks.lib.rcb import RCBTask
+from jiant.tasks.lib.terra import TerraTask
+
 from jiant.tasks.lib.abductive_nli import AbductiveNliTask
 from jiant.tasks.lib.acceptability_judgement.definiteness import AcceptabilityDefinitenessTask
 from jiant.tasks.lib.acceptability_judgement.coord import AcceptabilityCoordTask
@@ -97,6 +99,8 @@ from jiant.utils.python.io import read_json
 TASK_DICT = {
     "danetqa": DaNetQATask,
     "rcb": RCBTask,
+    "terra": TerraTask,
+
     "abductive_nli": AbductiveNliTask,
     "arc_easy": ArcEasyTask,
     "arc_challenge": ArcChallengeTask,

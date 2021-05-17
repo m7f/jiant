@@ -964,6 +964,8 @@ def get_evaluation_scheme_for_task(task) -> BaseEvaluationScheme:
         task,
         (
             tasks_retrieval.DaNetQATask,
+            tasks_retrieval.TerraTask,
+
             tasks_retrieval.AdversarialNliTask,
             tasks_retrieval.AbductiveNliTask,
             tasks_retrieval.AcceptabilityDefinitenessTask,
