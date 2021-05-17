@@ -44,6 +44,7 @@ RUSSIANSUPERGLUE_TASKS = {
     "danetqa",
     "rcb",
     "terra",
+    "parus",
 }
 
 DIRECT_DOWNLOAD_TASKS = set(

@@ -4,6 +4,7 @@ from typing import Optional
 from jiant.tasks.lib.danetqa import DaNetQATask
 from jiant.tasks.lib.rcb import RCBTask
 from jiant.tasks.lib.terra import TerraTask
+from jiant.tasks.lib.parus import ParusTask
 
 from jiant.tasks.lib.abductive_nli import AbductiveNliTask
 from jiant.tasks.lib.acceptability_judgement.definiteness import AcceptabilityDefinitenessTask
@@ -100,6 +101,7 @@ TASK_DICT = {
     "danetqa": DaNetQATask,
     "rcb": RCBTask,
     "terra": TerraTask,
+    "parus": ParusTask,
 
     "abductive_nli": AbductiveNliTask,
     "arc_easy": ArcEasyTask,
