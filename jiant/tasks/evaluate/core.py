@@ -1054,7 +1054,7 @@ def get_evaluation_scheme_for_task(task) -> BaseEvaluationScheme:
         ),
     ):
         return MultiLabelAccAndF1EvaluationScheme()
-    elif isinstance(task, tasks_retrieval.ReCoRDTask):
+    elif isinstance(task, (tasks_retrieval.ReCoRDTask, tasks_retrieval.RuCoSTask)):
         return ReCordEvaluationScheme()
     elif isinstance(
         task,

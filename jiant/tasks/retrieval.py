@@ -6,6 +6,7 @@ from jiant.tasks.lib.rcb import RCBTask
 from jiant.tasks.lib.terra import TerraTask
 from jiant.tasks.lib.parus import ParusTask
 from jiant.tasks.lib.muserc import MuSeRCTask
+from jiant.tasks.lib.rucos import RuCoSTask
 
 from jiant.tasks.lib.abductive_nli import AbductiveNliTask
 from jiant.tasks.lib.acceptability_judgement.definiteness import AcceptabilityDefinitenessTask
@@ -104,6 +105,7 @@ TASK_DICT = {
     "terra": TerraTask,
     "parus": ParusTask,
     "muserc": MuSeRCTask,
+    "rucos": RuCoSTask,
 
     "abductive_nli": AbductiveNliTask,
     "arc_easy": ArcEasyTask,
