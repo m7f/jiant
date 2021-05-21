@@ -23,7 +23,7 @@ class Batch(terra.Batch):
     pass
 
 
-class LiDiRusTask(terra.Terra):
+class LiDiRusTask(terra.TerraTask):
     def get_train_examples(self):
         raise RuntimeError("This task does not support training examples")
 
