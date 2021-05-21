@@ -49,6 +49,18 @@ def download_task_data_and_write_config(task_name: str, task_data_path: str, tas
         download_rucos_data_and_write_config(
             task_name=task_name, task_data_path=task_data_path, task_config_path=task_config_path
         )
+    elif task_name == "rwsd":
+        download_rwsd_data_and_write_config(
+            task_name=task_name, task_data_path=task_data_path, task_config_path=task_config_path
+        )
+    elif task_name == "russe":
+        download_russe_data_and_write_config(
+            task_name=task_name, task_data_path=task_data_path, task_config_path=task_config_path
+        )
+    elif task_name == "lidirus":
+        download_lidirus_data_and_write_config(
+            task_name=task_name, task_data_path=task_data_path, task_config_path=task_config_path
+        )
     elif task_name == "abductive_nli":
         download_abductive_nli_data_and_write_config(
             task_name=task_name, task_data_path=task_data_path, task_config_path=task_config_path
@@ -250,6 +262,61 @@ def download_rucos_data_and_write_config(task_name: str, task_data_path: str, ta
                 "train": os.path.join(task_data_path, "train.jsonl"),
                 "val": os.path.join(task_data_path, "val.jsonl"),
                 "test": os.path.join(task_data_path, "test.jsonl"),
+            },
+            "name": task_name,
+        },
+        path=task_config_path,
+    )
+
+def download_rwsd_data_and_write_config(task_name: str, task_data_path: str, task_config_path: str):
+    os.makedirs(task_data_path, exist_ok=True)
+    download_utils.download_and_unzip(
+        "https://github.com/m7f/jiant/blob/russiansuperglue/data/RWSD.zip?raw=true",
+        task_data_path,
+    )
+    py_io.write_json(
+        data={
+            "task": task_name,
+            "paths": {
+                "train": os.path.join(task_data_path, "train.jsonl"),
+                "val": os.path.join(task_data_path, "val.jsonl"),
+                "test": os.path.join(task_data_path, "test.jsonl"),
+            },
+            "name": task_name,
+        },
+        path=task_config_path,
+    )
+
+def download_russe_data_and_write_config(task_name: str, task_data_path: str, task_config_path: str):
+    os.makedirs(task_data_path, exist_ok=True)
+    download_utils.download_and_unzip(
+        "https://github.com/m7f/jiant/blob/russiansuperglue/data/RUSSE.zip?raw=true",
+        task_data_path,
+    )
+    py_io.write_json(
+        data={
+            "task": task_name,
+            "paths": {
+                "train": os.path.join(task_data_path, "train.jsonl"),
+                "val": os.path.join(task_data_path, "val.jsonl"),
+                "test": os.path.join(task_data_path, "test.jsonl"),
+            },
+            "name": task_name,
+        },
+        path=task_config_path,
+    )
+
+def download_lidirus_data_and_write_config(task_name: str, task_data_path: str, task_config_path: str):
+    os.makedirs(task_data_path, exist_ok=True)
+    download_utils.download_and_unzip(
+        "https://github.com/m7f/jiant/blob/russiansuperglue/data/LiDiRus.zip?raw=true",
+        task_data_path,
+    )
+    py_io.write_json(
+        data={
+            "task": task_name,
+            "paths": {
+                "test": os.path.join(task_data_path, "LiDiRus.jsonl"),
             },
             "name": task_name,
         },
