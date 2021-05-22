@@ -243,8 +243,13 @@ class RUSSETask(SuperGlueMixin, Task):
     def _create_examples(cls, lines, set_type):
         examples = []
         for line in lines:
-            span1 = ExclusiveSpan(int(line["start1"]), int(line["end1"]))
-            span2 = ExclusiveSpan(int(line["start2"]), int(line["end2"]))
+            # Drop broken cases
+            if '»' in line["sentence1"] or '»' in line["sentence2"]:
+                continue
+            if '«' in line["sentence1"] or '«' in line["sentence2"]:
+                continue
+            span1 = ExclusiveSpan(int(line["start1"]), int(line["end1"])-1) # fix end span by -1
+            span2 = ExclusiveSpan(int(line["start2"]), int(line["end2"])-1) # fix end span by -1
             # Note, the chosen word may be different (e.g. different tenses) in sent1 and sent2,
             #   hence we don't do an assert here.
             examples.append(
